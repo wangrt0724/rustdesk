@@ -26,4 +26,5 @@ pub async fn secure_tcp(conn: &mut Stream, key: &str) -> ResultType<()> {
     if use_ws() {
         return Ok(());
     }
+    ....
 ```
