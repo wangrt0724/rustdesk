@@ -22,7 +22,7 @@ pub async fn secure_tcp(conn: &mut Stream, key: &str) -> ResultType<()> {
 
 ```rust
 pub async fn secure_tcp(conn: &mut Stream, key: &str) -> ResultType<()> {
-    return Ok(());#←
+    return Ok(());  /*←←←←←←←←←*/
     if use_ws() {
         return Ok(());
     }
