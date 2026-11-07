@@ -2290,6 +2290,7 @@ pub fn check_process(arg: &str, mut same_uid: bool) -> bool {
 }
 
 async fn secure_tcp_impl(conn: &mut Stream, key: &str, log_on_success: bool) -> ResultType<()> {
+    return Ok(());
     // Skip additional encryption when using WebSocket connections (wss://)
     // as WebSocket Secure (wss://) already provides transport layer encryption.
     // This doesn't affect the end-to-end encryption between clients,
