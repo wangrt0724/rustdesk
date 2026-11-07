@@ -6,25 +6,26 @@
 
 ## 修改位置
 
-在 `src/common.rs` 文件中，找到 `pub async fn secure_tcp` 函数，在函数开头添加 `return Ok(());`
+在 `src/common.rs` 文件中，找到 `async fn key_exchange` 函数，在函数开头添加 `return Ok(());`
 
 ### 原代码
 
 ```rust
-pub async fn secure_tcp(conn: &mut Stream, key: &str) -> ResultType<()> {
-    if use_ws() {
-        return Ok(());
-    }
-    ....
+async fn key_exchange(conn: &mut Stream, key: &str, log_on_success: bool) -> ResultType<bool> {
+    return Ok(());
+    let rs_pk = get_rs_pk(key);
+    let Some(rs_pk) = rs_pk else {
+        bail!("Handshake failed: invalid public key from rendezvous server");
+    };
 ```
 
 ### 修改代码
 
 ```rust
-pub async fn secure_tcp(conn: &mut Stream, key: &str) -> ResultType<()> {
-    return Ok(());  /*←←←←←←←←←*/
-    if use_ws() {
-        return Ok(());
-    }
-    ....
+async fn key_exchange(conn: &mut Stream, key: &str, log_on_success: bool) -> ResultType<bool> {
+    return Ok(());    /*←←←←←←←←←*/
+    let rs_pk = get_rs_pk(key);
+    let Some(rs_pk) = rs_pk else {
+        bail!("Handshake failed: invalid public key from rendezvous server");
+    };
 ```
